@@ -5,39 +5,41 @@
 #include <complex>
 #include <sstream>
 
+using namespace std;
+using namespace sf;
+
 const unsigned int MAX_ITER = 64;
 const float BASE_WIDTH = 4.0;
 const float BASE_HEIGHT = 4.0;
 const float BASE_ZOOM = 0.5;
 
-class ComplexPlane : public sf::Drawable {
+enum class State { CALCULATING, DISPLAYING };
+
+class ComplexPlane : public Drawable {
 public:
     ComplexPlane(int pixelWidth, int pixelHeight);
-
     void updateRender();
     void zoomIn();
     void zoomOut();
-    void setCenter(sf::Vector2i mousePixel);
-    void setMouseLocation(sf::Vector2i mousePixel);
-    void loadText(sf::Text& text);
+    void setCenter(Vector2i mousePixel);
+    void setMouseLocation(Vector2i mousePixel);
+    void loadText(Text& text);
 
 private:
-    enum class State { CALCULATING, DISPLAYING };
+    virtual void draw(RenderTarget& target, RenderStates states) const override;
+    size_t countIterations(Vector2f coord);
+    void iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b);
+    Vector2f mapPixelToCoords(Vector2i mousePixel);
 
-    sf::Vector2u m_pixel_size;
+    int m_pixelWidth;
+    int m_pixelHeight;
     float m_aspectRatio;
-    sf::Vector2f m_plane_center;
-    sf::Vector2f m_plane_size;
+    Vector2f m_plane_center;
+    Vector2f m_plane_size;
     int m_zoomCount;
     State m_State;
-    sf::VertexArray m_vArray;
-    sf::Vector2f m_mouseLocation;
-
-    size_t countIterations(sf::Vector2f coord);
-    void iterationsToRGB(size_t count, sf::Uint8& r, sf::Uint8& g, sf::Uint8& b);
-    sf::Vector2f mapPixelToCoords(sf::Vector2i pixel) const;
-
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+    VertexArray m_vArray;
+    Vector2f m_mouseLocation;
 };
 
 #endif // COMPLEXPLANE_H
