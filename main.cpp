@@ -18,7 +18,7 @@ int main() {
 
     // Load font
     Font font;
-    if (!font.loadFromFile("arial.ttf")) {
+    if (!font.loadFromFile("Arial.ttf")) {
         cerr << "Failed to load font!" << endl;
         return 1;
     }
