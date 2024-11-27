@@ -14,7 +14,7 @@ int main() {
 
     // Create the render window
     RenderWindow window(VideoMode(screenWidth, screenHeight), "Mandelbrot Set");
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(60); //60 FPS for smoother performance/reduced CPU usage
 
     // Load font
     Font font;
@@ -23,13 +23,13 @@ int main() {
         return 1;
     }
 
-    // Text for UI
+    // Text setting on screen
     Text displayText;
     displayText.setFont(font);
     displayText.setCharacterSize(16);
     displayText.setFillColor(Color::White);
 
-    // ComplexPlane object
+    // ComplexPlane object (window dimension)
     ComplexPlane complexPlane(screenWidth, screenHeight);
 
     // Main loop
