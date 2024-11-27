@@ -3,12 +3,12 @@
 
 ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
     : m_pixelWidth(pixelWidth), m_pixelHeight(pixelHeight),
-      m_vArray(Points, pixelWidth * pixelHeight) {
-    m_aspectRatio = static_cast<float>(pixelHeight) / pixelWidth;
-    m_plane_center = {0.0f, 0.0f};
-    m_plane_size = {BASE_WIDTH, BASE_HEIGHT * m_aspectRatio};
-    m_zoomCount = 0;
-    m_State = State::CALCULATING;
+      m_vArray(Points, pixelWidth * pixelHeight) { // holds points to render set
+    m_aspectRatio = static_cast<float>(pixelHeight) / pixelWidth; // calculates ration of window
+    m_plane_center = {0.0f, 0.0f}; 
+    m_plane_size = {BASE_WIDTH, BASE_HEIGHT * m_aspectRatio}; //adjust with ratio
+    m_zoomCount = 0; 
+    m_State = State::CALCULATING; //tracks rendering state
 }
 
 void ComplexPlane::draw(RenderTarget& target, RenderStates states) const {
