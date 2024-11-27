@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include <sstream>
 #include "ComplexPlane.h"
+#include <iostream>
 
 int main() {
     // Get desktop resolution and create a window
